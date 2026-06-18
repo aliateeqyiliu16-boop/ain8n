@@ -1,0 +1,334 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Faisalabad Cycling Club - Ride Feedback",
+        "formDescription": "Tell us how your ride went — it takes less than a minute",
+        "formFields": {
+          "values": [
+            {
+              "fieldType": "html",
+              "elementName": "logo",
+              "html": "<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td align=\"center\" style=\"text-align:center;\"><img src=\"https://i.postimg.cc/ppTrsFZz/logo.png\" style=\"width:120px;height:120px;object-fit:contain;\" alt=\"Faisalabad Cycling Club\"/></td></tr></table>"
+            },
+            {
+              "fieldLabel": "Name",
+              "placeholder": "Ali Ateeq",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Age",
+              "fieldType": "number",
+              "placeholder": "18",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Gender",
+              "fieldType": "dropdown",
+              "defaultValue": "male",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Male"
+                  },
+                  {
+                    "option": "Female"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "How would you rate the ride?",
+              "fieldType": "dropdown",
+              "defaultValue": "5",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1 - Poor"
+                  },
+                  {
+                    "option": "2 - Fair"
+                  },
+                  {
+                    "option": "3 - Good"
+                  },
+                  {
+                    "option": "4 - Very Good"
+                  },
+                  {
+                    "option": "5 - Excellent"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "What could we improve?",
+              "fieldType": "dropdown",
+              "multiselect": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Route - distance, scenery, or path quality"
+                  },
+                  {
+                    "option": "Timing - start time or ride duration"
+                  },
+                  {
+                    "option": "Rental Bike Quality"
+                  },
+                  {
+                    "option": "Safety/Helmets"
+                  },
+                  {
+                    "option": "Group Pace"
+                  },
+                  {
+                    "option": "Communication"
+                  },
+                  {
+                    "option": "Refreshments"
+                  },
+                  {
+                    "option": "Nothing - it was great!"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Anything else you'd like to share?",
+              "fieldType": "textarea",
+              "placeholder": "Your comments...",
+              "requiredField": false
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "Submit Feedback",
+          "path": "CyclingClubFeedback",
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "Thank you! Your feedback helps us make every ride better. See you on the next one!"
+            }
+          },
+          "useWorkflowTimezone": true,
+          "customCss": "/* ═══════════════════════════════════════════\n   FAISALABAD CYCLING CLUB - LOGO MATCHED THEME\n   Colors extracted from official logo\n   Navy #00143c | Blue #148cc8 | Amber #f0a014\n   ═══════════════════════════════════════════ */\n\n:root {\n\t--color-background: #e8eff6;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #00143c;\n\t--color-card-shadow: rgba(0, 20, 60, 0.15);\n\t--box-shadow-card: 0px 10px 30px rgba(0, 20, 60, 0.12);\n\t--border-radius-card: 14px;\n\t--card-border-radius: 14px;\n\t--color-header: #00143c;\n\t--color-header-subtext: #148cc8;\n\t--color-label: #00143c;\n\t--color-required: #f0a014;\n\t--color-error: #dc2626;\n\t--color-input-border: #78b4dc;\n\t--color-input-text: #00143c;\n\t--color-focus-border: #f0a014;\n\t--border-radius-input: 10px;\n\t--color-submit-btn-bg: #00143c;\n\t--color-submit-btn-text: #ffffff;\n\t--color-clear-button-bg: #148cc8;\n\t--border-radius-clear-btn: 50%;\n\t--color-link: #f0a014;\n\t--color-html-text: #00143c;\n\t--color-html-link: #f0a014;\n\t--color-test-notice-text: #00143c;\n\t--color-test-notice-bg: #e8eff6;\n\t--color-test-notice-border: #78b4dc;\n}\n\n.n8n-form-input-html img {\n\tdisplay: block !important;\n\tmargin: 0 auto !important;\n}\n\n.n8n-form-input-html ul,\n.n8n-form-input-html p {\n\ttext-align: left !important;\n}"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -1392,
+        -608
+      ],
+      "name": "On feedback form submission",
+      "webhookId": "a1b2c3d4-feed-4aaa-9bbb-feedback00001",
+      "id": "f1e2d3c4-feed-4aaa-9bbb-feedback00002"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "date",
+              "name": "Submitted On",
+              "value": "={{ $now.format('dd-MM-yyyy HH:mm') }}",
+              "type": "string"
+            },
+            {
+              "id": "name",
+              "name": "Name",
+              "value": "={{ $('On feedback form submission').item.json['Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "age",
+              "name": "Age",
+              "value": "={{ $('On feedback form submission').item.json['Age'] }}",
+              "type": "string"
+            },
+            {
+              "id": "gender",
+              "name": "Gender",
+              "value": "={{ $('On feedback form submission').item.json['Gender'] }}",
+              "type": "string"
+            },
+            {
+              "id": "rating",
+              "name": "Rating",
+              "value": "={{ $('On feedback form submission').item.json['How would you rate the ride?'] }}",
+              "type": "string"
+            },
+            {
+              "id": "improvements",
+              "name": "Improvements",
+              "value": "={{ $('On feedback form submission').item.json['What could we improve?'] }}",
+              "type": "string"
+            },
+            {
+              "id": "comments",
+              "name": "Comments",
+              "value": "={{ $('On feedback form submission').item.json[\"Anything else you'd like to share?\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1168,
+        -608
+      ],
+      "name": "Prepare Feedback Data",
+      "id": "a1b2c3d4-feed-4aaa-9bbb-feedback00003"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1b9CXMP3iEyQgOv_aT0sdZljB80ij6HqkYvbPzLEFtjU",
+          "mode": "list",
+          "cachedResultName": "fcc",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1b9CXMP3iEyQgOv_aT0sdZljB80ij6HqkYvbPzLEFtjU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feedback",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1b9CXMP3iEyQgOv_aT0sdZljB80ij6HqkYvbPzLEFtjU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Submitted On": "={{ $json['Submitted On'] }}",
+            "Name": "={{ $json.Name }}",
+            "Age": "={{ $json.Age }}",
+            "Gender": "={{ $json.Gender }}",
+            "Rating": "={{ $json.Rating }}",
+            "Improvements": "={{ $json.Improvements }}",
+            "Comments": "={{ $json.Comments }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Submitted On",
+              "displayName": "Submitted On",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gender",
+              "displayName": "Gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Rating",
+              "displayName": "Rating",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Improvements",
+              "displayName": "Improvements",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Comments",
+              "displayName": "Comments",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -944,
+        -608
+      ],
+      "name": "Save Feedback to Google Sheets",
+      "id": "a1b2c3d4-feed-4aaa-9bbb-feedback00004",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "edtVgZvEDuggveNi",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "On feedback form submission": {
+      "main": [
+        [
+          {
+            "node": "Prepare Feedback Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Feedback Data": {
+      "main": [
+        [
+          {
+            "node": "Save Feedback to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5d0c2114bdd79fa997d56cc19388a7d4285fd7abe514e90d4f4001e309e39d9e"
+  }
+}
